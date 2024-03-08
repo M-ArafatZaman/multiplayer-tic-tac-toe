@@ -1,4 +1,5 @@
 from bottle import Bottle, request
+import HTMLProvider
 
 HOST = "localhost"
 PORT = 8000
@@ -12,7 +13,7 @@ class BottleServer(Bottle):
         self.route("/", callback=self.welcome_page)
 
     def welcome_page(self):
-        return "Hello"
+        return HTMLProvider.get_welcome_page()
 
 if __name__ == "__main__":
     app = BottleServer()
