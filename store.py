@@ -84,6 +84,40 @@ def create_user(username, password):
     except sqlite3.Error as e:
         print(f"Error creating user: {e}")
         return False
+    
+def get_user_details(username):
+    """
+    Retrieves user details from the SQLite database.
+
+    Args:
+        db_file (str): Path to the database file.
+        username (str): User's username.
+
+    Returns:
+        dict: A dictionary containing user details (wins, losses, games_played, score).
+              Returns None if the user does not exist.
+    """
+    try:
+        # Retrieve user details based on the provided username
+        cursor.execute("SELECT wins, losses, games_played, score FROM User WHERE username = ?", (username,))
+        user_details = cursor.fetchone()
+
+        if user_details:
+            wins, losses, games_played, score = user_details
+            return {
+                "username": username,
+                "wins": wins,
+                "losses": losses,
+                "games_played": games_played,
+                "score": score
+            }
+        else:
+            print(f"User '{username}' not found.")
+            return None
+        
+    except sqlite3.Error as e:
+        print(f"Error retrieving user details: {e}")
+        return None
 
 
 if __name__ == '__main__':

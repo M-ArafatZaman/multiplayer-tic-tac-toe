@@ -12,3 +12,4 @@
 |---|---|---|
 | Bing Copilot | Generated the script to initialize the database | `store.py` |
 | Bing Copilot | Generated a function to create a new user in the database | `store.py` |
+| Bing Copilot | Generated a function to get all the user details in the database | `store.py` |
