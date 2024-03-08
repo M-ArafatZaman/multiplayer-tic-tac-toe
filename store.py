@@ -6,7 +6,7 @@ DB_FILE = "database.db"
 conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
 
-def handle_exit():
+def handle_exit(*args, **kwargs):
     print("Closing database connection.")
     conn.close()
 
@@ -16,9 +16,6 @@ signal.signal(signal.SIGINT, handle_exit)
 def initialize_database():
     """
     Initializes an SQLite database with two tables: "User" and "Game".
-
-    Args:
-        db_file (str): Path to the database file.
 
     Returns:
         None
@@ -62,7 +59,6 @@ def create_user(username, password):
     Creates a new user in the SQLite database.
 
     Args:
-        db_file (str): Path to the database file.
         username (str): User's desired username.
         password (str): User's password.
 
@@ -90,7 +86,6 @@ def get_user_details(username):
     Retrieves user details from the SQLite database.
 
     Args:
-        db_file (str): Path to the database file.
         username (str): User's username.
 
     Returns:
