@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Itim', cursive;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .background {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .title h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .display {
+            text-align: center;
+        }
+
+        .display-player {
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .tile {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .announcer.hide {
+            display: none;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #reset {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #reset:hover {
+            background-color: #0056b3;
+        }
+
+        .tile {
+            color: rgba(0, 0, 0, 0);
+        }
+        .tile:disabled {
+            color: rgba(0,0,0,1);
+        }
+    </style>
+</head>
+<body>
+    <main class="background">
+        <section class="title">
+            <h1>Tic Tac Toe</h1>
+        </section>
+        <section class="display">
+            Player <span class="display-player playerX">X</span>'s turn
+        </section>
+        <form action="/game/{game_id}" class="container" method="POST">
+            <input type="submit" class="tile" name="button" value="{value[0]}" {disabled[0]}/>
+            <input type="submit" class="tile" name="button" value="{value[1]}" {disabled[1]}/>
+            <input type="submit" class="tile" name="button" value="{value[2]}" {disabled[2]}/>
+            <input type="submit" class="tile" name="button" value="{value[3]}" {disabled[3]}/>
+            <input type="submit" class="tile" name="button" value="{value[4]}" {disabled[4]}/>
+            <input type="submit" class="tile" name="button" value="{value[5]}" {disabled[5]}/>
+            <input type="submit" class="tile" name="button" value="{value[6]}" {disabled[6]}/>
+            <input type="submit" class="tile" name="button" value="{value[7]}" {disabled[7]}/>
+            <input type="submit" class="tile" name="button" value="{value[8]}" {disabled[8]}/>
+        </form>
+        <section class="display announcer hide"></section>
+        <section class="controls">
+            <button id="reset">Reset</button>
+        </section>
+    </main>
+</body>
+</html>
