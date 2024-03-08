@@ -1,4 +1,4 @@
-from bottle import Bottle, request
+from bottle import Bottle, request, response
 import HTMLProvider
 import user
 
@@ -16,6 +16,7 @@ class BottleServer(Bottle):
         self.route("/register", method="GET", callback=self.get_register_page)
         self.route("/game/<game_id>", method="GET", callback=self.get_game_page)
         self.route("/register", method="POST", callback=self.register)
+        self.route("/login", method="POST", callback=self.login)
 
     def get_welcome_page(self):
         return HTMLProvider.get_welcome_page()
@@ -30,12 +31,18 @@ class BottleServer(Bottle):
         return HTMLProvider.get_game_page()
     
     def login(self):
-        pass
+        username = request.forms.get("username", None)
+        password = request.forms.get("password", None)          
+        if user.login_user(username, password):
+            response.set_cookie("user", username, path="/")
+            return "Successful login"
+        return "Unsuccessful"
 
     def register(self):
         username = request.forms.get("username", None)
         password = request.forms.get("password", None)    
         if user.register_user(username, password):
+            #response.set_cookie("user", username, path="/")
             return "Registered successfully"
         return "Error"
     

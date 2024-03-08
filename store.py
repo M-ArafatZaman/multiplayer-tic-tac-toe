@@ -9,6 +9,7 @@ cursor = conn.cursor()
 def handle_exit(*args, **kwargs):
     print("Closing database connection.")
     conn.close()
+    exit(0)
 
 signal.signal(signal.SIGTERM, handle_exit)
 signal.signal(signal.SIGINT, handle_exit)
@@ -94,13 +95,14 @@ def get_user_details(username):
     """
     try:
         # Retrieve user details based on the provided username
-        cursor.execute("SELECT wins, losses, games_played, score FROM User WHERE username = ?", (username,))
+        cursor.execute("SELECT password, wins, losses, games_played, score FROM User WHERE username = ?", (username,))
         user_details = cursor.fetchone()
 
         if user_details:
-            wins, losses, games_played, score = user_details
+            password, wins, losses, games_played, score = user_details
             return {
                 "username": username,
+                "password": password,
                 "wins": wins,
                 "losses": losses,
                 "games_played": games_played,
