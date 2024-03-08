@@ -1,8 +1,17 @@
 import sqlite3
+import signal
+
 
 DB_FILE = "database.db"
 conn = sqlite3.connect(DB_FILE)
 cursor = conn.cursor()
+
+def handle_exit():
+    print("Closing database connection.")
+    conn.close()
+
+signal.signal(signal.SIGTERM, handle_exit)
+signal.signal(signal.SIGINT, handle_exit)
 
 def initialize_database():
     """
@@ -46,6 +55,35 @@ def initialize_database():
 
     except sqlite3.Error as e:
         print(f"Error initializing database: {e}")
+
+
+def create_user(username, password):
+    """
+    Creates a new user in the SQLite database.
+
+    Args:
+        db_file (str): Path to the database file.
+        username (str): User's desired username.
+        password (str): User's password.
+
+    Returns:
+        bool: True if user creation is successful, False otherwise.
+    """
+    try:
+        # Check if the username already exists
+        cursor.execute("SELECT COUNT(*) FROM User WHERE username = ?", (username,))
+        if cursor.fetchone()[0] > 0:
+            # User already exists
+            return False
+
+        # Insert the new user into the User table
+        cursor.execute("INSERT INTO User (username, password) VALUES (?, ?)", (username, password))
+        conn.commit()
+        return True
+
+    except sqlite3.Error as e:
+        print(f"Error creating user: {e}")
+        return False
 
 
 if __name__ == '__main__':
