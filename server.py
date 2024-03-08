@@ -12,12 +12,16 @@ class BottleServer(Bottle):
         # Add routes
         self.route("/", callback=self.get_welcome_page)
         self.route("/login", method="GET", callback=self.get_login_page)
+        self.route("/register", metho="GET", callback=self.get_register_page)
 
     def get_welcome_page(self):
         return HTMLProvider.get_welcome_page()
     
     def get_login_page(self):
         return HTMLProvider.get_login_page()
+    
+    def get_register_page(self):
+        return HTMLProvider.get_register_page()
 
 if __name__ == "__main__":
     app = BottleServer()
