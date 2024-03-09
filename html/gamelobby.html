@@ -50,11 +50,13 @@
 <body>
     <div class="lobby-container">
         <div class="username">Welcome, <span id="current-username">{name}</span>!</div>
-        <div class="button-wrapper">
-            <button class="button" onclick="createNewGame()">Create New Game</button>
-            <button class="button" onclick="joinGame()">Join a Game</button>
-        </div>
-        <input type="text" class="input-field" placeholder="Enter Game Code" id="game-code">
+        <form action="/join-game">
+            <div class="button-wrapper">
+                <button class="button" type="submit" >Create New Game</button>
+                <button class="button" type="submit" >Join a Game</button>
+            </div>
+            <input type="text" class="input-field" name="game-code" placeholder="Enter Game Code" id="game-code">
+        </form>
     </div>
 </body>
 </html>
