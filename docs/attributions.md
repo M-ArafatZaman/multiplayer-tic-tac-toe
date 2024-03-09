@@ -6,6 +6,7 @@
 | Bing Copilot | Generate login html page | `html/login.html` |
 | `html/register.html` | Modified the generated login page for register page | `html/register.html` |
 | Bing Copilot | Generated the game page which I then modified myself | `html/game.html` |
+| [Stackoverflow](https://stackoverflow.com/a/60045014) | How to get the id of the last inserted row | `store.py` |
 
 ## Store attributions
 | Source | Contribution | Location |

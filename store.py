@@ -1,5 +1,6 @@
 import sqlite3
 import signal
+import json
 
 
 DB_FILE = "database.db"
@@ -95,12 +96,13 @@ def get_user_details(username):
     """
     try:
         # Retrieve user details based on the provided username
-        cursor.execute("SELECT password, wins, losses, games_played, score FROM User WHERE username = ?", (username,))
+        cursor.execute("SELECT id, password, wins, losses, games_played, score FROM User WHERE username = ?", (username,))
         user_details = cursor.fetchone()
 
         if user_details:
-            password, wins, losses, games_played, score = user_details
+            id, password, wins, losses, games_played, score = user_details
             return {
+                "id": id,
                 "username": username,
                 "password": password,
                 "wins": wins,
@@ -116,6 +118,36 @@ def get_user_details(username):
         print(f"Error retrieving user details: {e}")
         return None
 
+def create_game(player1):
+    try:
+        # Get user details
+        player1_details = get_user_details(player1)
+
+        cursor.execute("INSERT INTO Game (player1_id) VALUES (?, ?) RETURNING id", (player1_details["id"],))
+        conn.commit()
+        id = cursor.fetchone()
+
+        return id
+
+    except sqlite3.Error as e:
+        # Some error
+        return None
+
+def get_game_details(game_id):
+    try:
+        # Get user details
+        cursor.execute("SELECT player1_id, player2_id, game_state FROM Game WHERE id = ?", (game_id,))
+        player1, player2, game_state = cursor.fetchone()
+
+        return {
+            "player1": player1,
+            "player2": player2,
+            "game_state": json.loads(game_state)
+        }
+
+    except sqlite3.Error as e:
+        # Some error
+        return None
 
 if __name__ == '__main__':
     initialize_database()
