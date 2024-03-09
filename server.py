@@ -15,6 +15,8 @@ class BottleServer(Bottle):
         self.route("/login", method="GET", callback=self.get_login_page)
         self.route("/register", method="GET", callback=self.get_register_page)
         self.route("/game/<game_id>", method="GET", callback=self.get_game_page)
+        self.route("/game/", method="GET", callback=self.get_gamelobby_page)
+        # Post methods
         self.route("/register", method="POST", callback=self.register)
         self.route("/login", method="POST", callback=self.login)
 
@@ -30,10 +32,14 @@ class BottleServer(Bottle):
     def get_game_page(self, game_id):
         return HTMLProvider.get_game_page()
     
+    def get_gamelobby_page(self):
+        return HTMLProvider.get_gamelobby_page()
+    
     def login(self):
         username = request.forms.get("username", None)
         password = request.forms.get("password", None)          
         if user.login_user(username, password):
+            # Use cookies to login user
             response.set_cookie("user", username, path="/")
             return "Successful login"
         return "Unsuccessful"
@@ -42,7 +48,8 @@ class BottleServer(Bottle):
         username = request.forms.get("username", None)
         password = request.forms.get("password", None)    
         if user.register_user(username, password):
-            #response.set_cookie("user", username, path="/")
+            # Use cookies to login user
+            response.set_cookie("user", username, path="/")
             return "Registered successfully"
         return "Error"
     

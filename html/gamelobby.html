@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Lobby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .lobby-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .username {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            width: 48%;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lobby-container">
+        <div class="username">Welcome, <span id="current-username">{name}</span>!</div>
+        <div class="button-wrapper">
+            <button class="button" onclick="createNewGame()">Create New Game</button>
+            <button class="button" onclick="joinGame()">Join a Game</button>
+        </div>
+        <input type="text" class="input-field" placeholder="Enter Game Code" id="game-code">
+    </div>
+</body>
+</html>

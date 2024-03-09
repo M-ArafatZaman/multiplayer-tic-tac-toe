@@ -13,3 +13,8 @@
 | Bing Copilot | Generated the script to initialize the database | `store.py` |
 | Bing Copilot | Generated a function to create a new user in the database | `store.py` |
 | Bing Copilot | Generated a function to get all the user details in the database | `store.py` |
+
+## Server Attributions
+| Source | Contribution | Location |
+|---|---|---|
+| [Stackoverflow](https://stackoverflow.com/questions/21215904/read-cookie-text-value-in-a-python-bottle-application) | How cookies work in bottle, to keep track of logged in user. | `server.py` |
